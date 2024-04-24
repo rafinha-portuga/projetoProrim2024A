@@ -21,7 +21,7 @@ public class Startup {
         var cliente1 = new Cliente();
         cliente1.setNome("Rafa");
         cliente1.setEndereco("Rua lalalalala 100");
-        cliente1.setDataNascimento(new Date(2024,04,17));
+        cliente1.setDataNascimento(new Date());
         service.save(cliente1);
 
     }

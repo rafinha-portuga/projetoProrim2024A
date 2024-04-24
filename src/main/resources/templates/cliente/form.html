@@ -6,6 +6,7 @@
             <nav th:replace="layout :: menu">(menu)</nav>
             <h1>Cliente</h1>
             <form th:action="@{/clientes}" method="post" th:object="${cliente}">
+                <input type="hidden" th:field="*{id}">
                 <div class="form-group">
                     <label for="txtnome">Nome</label>
                     <input type="text" th:field="*{nome}" id="txtnome" class="form-control">
