@@ -4,37 +4,39 @@
     <body>
       <main class="container">
         <nav th:replace="layout :: menu">(menu)</nav>
-        <h1>Clientes</h1>
+        <h1>Usuarios</h1>
 
         <a href="/" class="btn btn-light">Voltar</a>
-        <a href="/clientes/novo" class="btn btn-primary">Novo</a>
+        <a href="/usuarios/novo" class="btn btn-primary">Novo</a>
 
-        <table class="table" id="tabclientes">
+        <table class="table" id="tabusuarios">
             <thead>
                 <th>Id</th>
                 <th>Nome</th>
+                <th>Tipo de Usuario</th>
                 <th>Endereço</th>
                 <th>Data Nascimento</th>
                 <th></th>
             </thead>
             <tbody>
-                <tr th:each="umCliente : ${listaClientes}">
-                    <td th:text="${umCliente.id}"></td>
-                    <td th:text="${umCliente.nome}"></td>
-                    <td th:text="${umCliente.endereco}"></td>
-                    <td th:text="${umCliente.dataNascimento}"></td>
-                    <td><a th:href="@{'clientes/alterar/' + ${umCliente.id}}" class="btn btn-warning">Alterar</a>
-                        <button class="btn btn-danger js-delete" th:data-id="${umCliente.id}">Excluir</button>
+                <tr th:each="umUsuario : ${listaUsuarios}">
+                    <td th:text="${umUsuario.id}"></td>
+                    <td th:text="${umUsuario.nome}"></td>
+                    <td th:text="${umUsuario.tpUsuario}"></td>
+                    <td th:text="${umUsuario.endereco}"></td>
+                    <td th:text="${umUsuario.dataNascimento}"></td>
+                    <td><a th:href="@{'usuarios/alterar/' + ${umUsuario.id}}" class="btn btn-warning">Alterar</a>
+                        <button class="btn btn-danger js-delete" th:data-id="${umUsuario.id}">Excluir</button>
                     </td>
                 </tr>
             </tbody>
         </table>
 
-        <div class="modal" tabindex="-1" id="modalcliente">
+        <div class="modal" tabindex="-1" id="modalusuario">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title">Excluir Cliente</h5>
+                  <h5 class="modal-title">Excluir Usuario</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -49,7 +51,7 @@
           </div>
 
         <div th:include="layout :: footer">(footer)</div>
-        <script th:src="@{/scriptCliente.js}" ></script>
+        <script th:src="@{/scriptUsuario.js}" ></script>
       </main>
     </body>
 </html>

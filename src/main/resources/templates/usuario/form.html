@@ -4,16 +4,20 @@
     <body>
         <main class="container">
             <nav th:replace="layout :: menu">(menu)</nav>
-            <h1>Cliente</h1>
-            <form th:action="@{/clientes}" method="post" th:object="${cliente}">
+            <h1>Usuario</h1>
+            <form th:action="@{/usuarios}" method="post" th:object="${usuario}">
                 <input type="hidden" th:field="*{id}">
                 <div class="form-group">
                     <label for="txtnome">Nome</label>
                     <input type="text" th:field="*{nome}" id="txtnome" class="form-control">
                 </div>
                 <div class="form-group">
+                    <label for="txttpusuario">Tipo de Usuario</label>
+                    <input type="text" th:field="*{tpUsuario}" id="txttpusuario" class="form-control">
+                </div>
+                <div class="form-group">
                     <label for="txtendereco">Endereço</label>
-                    <input type="text" th:field="*{endereco}" id="txtendereco" class="form-control">   <!-- O "*" é para não precisar ficar escreverndo a anotação do nome cliente -->
+                    <input type="text" th:field="*{endereco}" id="txtendereco" class="form-control">   <!-- O "*" é para não precisar ficar escreverndo a anotação do nome usuario -->
                 </div>
                 <div class="form-group">
                     <label for="txtdatanascimento">Data de Nascimento</label>
@@ -21,7 +25,7 @@
                 </div>
 
                 <div class="form-group">
-                    <a href="/clientes" class="btn btn-light">Voltar</a>
+                    <a href="/usuarios" class="btn btn-light">Voltar</a>
                     <button class="btn btn-primary" type="submit">Enviar</button>
                 </div>
             </form>
