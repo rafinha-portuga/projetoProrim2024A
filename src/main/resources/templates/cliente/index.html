@@ -15,6 +15,9 @@
                 <th>Nome</th>
                 <th>Endereço</th>
                 <th>Data Nascimento</th>
+                <th>Tipo de Usuario</th>
+                <th>Cidade</th>
+                <th>Foto</th>
                 <th></th>
             </thead>
             <tbody>
@@ -23,6 +26,12 @@
                     <td th:text="${umCliente.nome}"></td>
                     <td th:text="${umCliente.endereco}"></td>
                     <td th:text="${umCliente.dataNascimento}"></td>
+                    <td th:text="${umCliente.tipoUsuario}"></td>
+                    <td th:text="${umCliente.cidade?.nome}"></td>
+                    <td>
+                      <img th:if="${umCliente.foto}" th:src="@{'/clientes/image/' + ${umCliente.id}}" 
+                           style="width: 150px; height: 100px;">
+                    </td>
                     <td><a th:href="@{'clientes/alterar/' + ${umCliente.id}}" class="btn btn-warning">Alterar</a>
                         <button class="btn btn-danger js-delete" th:data-id="${umCliente.id}">Excluir</button>
                     </td>

@@ -5,7 +5,7 @@
         <main class="container">
             <nav th:replace="layout :: menu">(menu)</nav>
             <h1>Cliente</h1>
-            <form th:action="@{/clientes}" method="post" th:object="${cliente}">
+            <form th:action="@{/clientes}" method="post" th:object="${cliente}" enctype="multipart/form-data">
                 <input type="hidden" th:field="*{id}">
                 <div class="form-group">
                     <label for="txtnome">Nome</label>
@@ -18,6 +18,38 @@
                 <div class="form-group">
                     <label for="txtdatanascimento">Data de Nascimento</label>
                     <input type="date" th:field="*{dataNascimento}" id="txtdatanascimento" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="txtCidade">Cidade</label>
+                    <select th:field="*{cidade}" class="form-select">
+                        <!-- <option ></option> -->
+                        <option value="">Selecionar...</option>
+                        <option 
+                        th:each="umaCidade : ${listaCidades}" 
+                        th:value="${umaCidade.id}" 
+                        th:text="${umaCidade.nome}"></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="txttipousuario">Tipo de Usuario</label>
+                    <select th:field="*{tipoUsuario}" class="form-select">
+                        <!-- <option ></option> -->
+                        <option value="">Selecionar...</option>
+                        <option value="ADM">Administrador</option>
+                        <option value="EMPRESA">Empresa</option>
+                        <option value="USUARIO">Usuario</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <div class="col-6">
+                        <img th:if="*{foto}" th:src="@{'/clientes/image/'+*{id}}" 
+                        style="width: 100px; height: 100px;">
+                    </div>
+
+                    <div class="col-6">
+                        <label>Foto:</label>
+                        <input type="file" name="file" class="form-control">
+                    </div>
                 </div>
 
                 <div class="form-group">

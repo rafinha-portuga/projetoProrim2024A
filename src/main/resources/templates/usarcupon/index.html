@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+    <head th:include="layout :: htmlhead"></head>
+    <body>
+      <main class="container">
+        <nav th:replace="layout :: menu">(menu)</nav>
+        <h1>Cupons Disponiveis</h1>
+
+        <a href="/" class="btn btn-light">Voltar</a>
+
+        <table class="table" id="tabcupons">
+            <thead>
+                <th>Nome</th>
+                <th>Desconto</th>
+                <th>Data de Expiração</th>
+                <th>Empresa</th>
+                <th></th>
+            </thead>
+            <tbody>
+                <tr th:each="umCupon, iterStat : ${listaCupons}">
+                    <td th:text="${umCupon.nome}" th:id="'nome-' + ${iterStat.index}"></td>
+                    <td th:text="${umCupon.desconto} + '%'"></td>
+                    <td th:text="${umCupon.dataExpiracao}"></td>
+                    <td>
+                      <a th:if="${umCupon.empresa?.foto}" th:href="${umCupon.empresa?.link}" target="_blank">
+                          <img th:src="@{'/empresas/image/' + ${umCupon.empresa?.id}}" style="width: 150px; height: 100px;">
+                      </a>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary" th:onclick="|copyToClipboard('nome-' + ${iterStat.index})|">Copiar Cupom</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div th:include="layout :: footer">(footer)</div>
+        <script th:src="@{/scriptCupon.js}" ></script>
+        <script>
+          function copyToClipboard(elementId) {
+            var text = document.getElementById(elementId).innerText;
+            if (!text) {
+                console.error("Elemento não encontrado ou está vazio: " + elementId);
+                return;
+            }
+            var textarea = document.createElement("textarea");
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand("copy");
+                alert("Cupom copiado: " + text);
+            } catch (err) {
+                console.error("Erro ao copiar para a área de transferência: ", err);
+            }
+            document.body.removeChild(textarea);
+          }
+        </script>
+      </main>
+    </body>
+</html>

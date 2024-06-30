@@ -4,8 +4,14 @@
     <body>
         <main class="container">
             <nav th:replace="layout :: menu">(menu)</nav>
-            <h1>Empresa</h1>
-            <form th:action="@{/empresas}" method="post" th:object="${empresa}">
+            <h1 th:if="${empresa.nome != null}" th:text="${'Empresa ' + empresa.nome}"></h1>
+            <h1 th:if="${empresa.nome == null}" th:text="'Empresa'"></h1>
+            <form 
+                th:action="@{/empresas}" 
+                method="post" 
+                th:object="${empresa}"
+                enctype="multipart/form-data"
+            >
                 <input type="hidden" th:field="*{id}">
                 <div class="form-group">
                     <label for="txtnome">Nome</label>
@@ -22,6 +28,21 @@
                 <div class="form-group">
                     <label for="txtdatanascimento">Data de Criação</label>
                     <input type="date" th:field="*{dataNascimento}" id="txtdatanascimento" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="txtlink">Link</label>
+                    <input type="text" th:field="*{link}" id="txtlink" class="form-control">
+                </div>
+                <div class="form-group">
+                    <div class="col-6">
+                        <img th:if="*{foto}" th:src="@{'/empresas/image/'+*{id}}" 
+                        style="width: 100px; height: 100px;">
+                    </div>
+
+                    <div class="col-6">
+                        <label>Logo:</label>
+                        <input type="file" name="file" class="form-control">
+                    </div>
                 </div>
 
                 <div class="form-group">

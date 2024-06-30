@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.univille.projprorim2024a.entity.Cupon;
+import br.univille.projprorim2024a.entity.Empresa;
 import br.univille.projprorim2024a.repository.CuponRepository;
 import br.univille.projprorim2024a.service.CuponService;
 
@@ -36,6 +37,11 @@ public class CuponServiceImpl
         var cliente = getById(id);
         repository.deleteById(id);
         return cliente;
+    }
+
+    @Override
+    public List<Cupon> getCuponByEmpresa(Empresa empresa) {
+        return repository.getCuponByEmpresa(empresa);
     }
     
 }

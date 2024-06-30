@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+    <head th:include="layout :: htmlhead"></head>
+    <body>
+      <main class="container">
+        <nav th:replace="layout :: menu">(menu)</nav>
+        <h1 th:text="${'Cupons ' + empresa.nome}"></h1>
+
+        <a href="/empresas" class="btn btn-light">Voltar</a>
+
+        <table class="table" id="tabcupons">
+            <thead>
+                <th>Nome</th>
+                <th>Desconto</th>
+                <th>Data de Expiração</th>
+                <th>Empresa</th>
+                <th></th>
+            </thead>
+            <tbody>
+                <tr th:each="umCupon : ${listaCuponsPorEmpresa}">
+                    <td th:text="${umCupon.nome}" ></td>
+                    <td th:text="${umCupon.desconto} + '%'"></td>
+                    <td th:text="${umCupon.dataExpiracao}"></td>
+                    <td>
+                      <a th:if="${umCupon.empresa?.foto}" th:href="${umCupon.empresa?.link}" target="_blank">
+                          <img th:src="@{'/empresas/image/' + ${umCupon.empresa?.id}}" style="width: 150px; height: 100px;">
+                      </a>
+                    </td>
+                    <td><a th:href="@{'/cupons/alterarCupomEmpresa/' + ${umCupon.id}}" class="btn btn-warning">Alterar</a>
+                      <button class="btn btn-danger js-delete" th:data-id="${umCupon.id}">Excluir</button>
+                  </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="modal" tabindex="-1" id="modalcupon">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Excluir Cupon</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p>Quer mesmo deletar esse registro?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+                <button type="button" class="btn btn-primary" id="btnsim">Sim</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div th:include="layout :: footer">(footer)</div>
+        <script th:src="@{/scriptCupon.js}" ></script>
+      </main>
+    </body>
+</html>

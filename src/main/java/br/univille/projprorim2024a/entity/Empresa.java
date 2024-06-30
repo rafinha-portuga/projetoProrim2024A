@@ -26,10 +26,28 @@ public class Empresa {
     private String cnpj;
     @Column(length = 1000)
     private String endereco;
+    @Column(length = 1000)
+    private String link;
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dataNascimento;
-
+    
+    private String foto;
+    
+    public String getLink() {
+        return link;
+    }
+    public void setLink(String link) {
+        this.link = link;
+    }
+    
+    public String getFoto() {
+        return foto;
+    }
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+    
     public String getCnpj() {
         return cnpj;
     }

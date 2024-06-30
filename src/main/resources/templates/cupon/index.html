@@ -13,16 +13,24 @@
             <thead>
                 <th>Id</th>
                 <th>Nome</th>
-                <th>Id Empresa</th>
+                <th>Empresa</th>
+                <th>Foto empresa</th>
                 <th>Data de Expiração</th>
+                <th>Desconto</th>
                 <th></th>
             </thead>
             <tbody>
                 <tr th:each="umCupon : ${listaCupons}">
                     <td th:text="${umCupon.id}"></td>
                     <td th:text="${umCupon.nome}"></td>
-                    <td th:text="${umCupon.idEmpresa}"></td>
+                    <td th:text="${umCupon.empresa?.nome}"></td>
+                    <td>
+                      <a th:if="${umCupon.empresa?.foto}" th:href="${umCupon.empresa?.link}" target="_blank">
+                          <img th:src="@{'/empresas/image/' + ${umCupon.empresa?.id}}" style="width: 150px; height: 100px;">
+                      </a>
+                    </td>
                     <td th:text="${umCupon.dataExpiracao}"></td>
+                    <td th:text="${umCupon.desconto} + '%'"></td>
                     <td><a th:href="@{'cupons/alterar/' + ${umCupon.id}}" class="btn btn-warning">Alterar</a>
                         <button class="btn btn-danger js-delete" th:data-id="${umCupon.id}">Excluir</button>
                     </td>

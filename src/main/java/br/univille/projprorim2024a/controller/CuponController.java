@@ -1,5 +1,7 @@
 package br.univille.projprorim2024a.controller;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.univille.projprorim2024a.entity.Cupon;
 import br.univille.projprorim2024a.service.CuponService;
+import br.univille.projprorim2024a.service.EmpresaService;
 
 @Controller
 @RequestMapping("/cupons")
@@ -17,6 +20,9 @@ public class CuponController {
 
     @Autowired
     private CuponService service;
+
+    @Autowired
+    private EmpresaService empresaService;
 
     @GetMapping
     public ModelAndView index() {
@@ -26,8 +32,14 @@ public class CuponController {
 
     @GetMapping("/novo")
     public ModelAndView novo(){
-        var cupon = new Cupon();
-        return new ModelAndView("cupon/form", "cupon", cupon);
+        HashMap<String,Object> dados = new HashMap<>();
+        var novoCupon = new Cupon();
+        var listaEmpresas = empresaService.getAll();
+
+        dados.put("cupon",novoCupon);
+        dados.put("listaEmpresas",listaEmpresas);
+
+        return new ModelAndView("cupon/form", dados);
     }
 
     @PostMapping
@@ -37,10 +49,27 @@ public class CuponController {
     }
 
     @GetMapping("/alterar/{id}")
-    public ModelAndView alterar(@PathVariable("id") long id){
-        var cupon = service.getById(id);
+    public ModelAndView alterar(@PathVariable("id") Cupon cupon){
 
-        return new ModelAndView("cupon/form", "cupon", cupon);
+        HashMap<String,Object> dados = new HashMap<>();
+        var listaEmpresas = empresaService.getAll();
+        dados.put("cupon",cupon);
+        dados.put("listaEmpresas",listaEmpresas);
+        
+
+        return new ModelAndView("cupon/form",dados);
+    }
+
+    @GetMapping("/alterarCupomEmpresa/{id}")
+    public ModelAndView alterarCupomEmpresa(@PathVariable("id") Cupon cupon){
+
+        HashMap<String,Object> dados = new HashMap<>();
+        var listaEmpresas = empresaService.getAll();
+        dados.put("cupon",cupon);
+        dados.put("listaEmpresas",listaEmpresas);
+        
+
+        return new ModelAndView("cupon/formEmpresa",dados);
     }
 
     @GetMapping("/delete/{id}")

@@ -16,6 +16,8 @@
                 <th>CNPJ</th>
                 <th>Endereço</th>
                 <th>Data de Criação</th>
+                <th>Link</th>
+                <th>Logo</th>
                 <th></th>
             </thead>
             <tbody>
@@ -25,8 +27,15 @@
                     <td th:text="${umEmpresa.cnpj}"></td>
                     <td th:text="${umEmpresa.endereco}"></td>
                     <td th:text="${umEmpresa.dataNascimento}"></td>
-                    <td><a th:href="@{'empresas/alterar/' + ${umEmpresa.id}}" class="btn btn-warning">Alterar</a>
-                        <button class="btn btn-danger js-delete" th:data-id="${umEmpresa.id}">Excluir</button>
+                    <td><a th:href="${umEmpresa.link}" th:text="${umEmpresa.link}" target="_blank"></a></td>
+                    <td>
+                      <img th:if="${umEmpresa.foto}" th:src="@{'/empresas/image/' + ${umEmpresa.id}}" 
+                           style="width: 150px; height: 100px;">
+                    </td>
+                    <td>
+                      <a th:href="@{'usarcupons/info/' + ${umEmpresa.id}}" class="btn btn-info">Visualizar Cupons</a>
+                      <a th:href="@{'empresas/alterar/' + ${umEmpresa.id}}" class="btn btn-warning">Alterar</a>
+                      <button class="btn btn-danger js-delete" th:data-id="${umEmpresa.id}">Excluir</button>
                     </td>
                 </tr>
             </tbody>

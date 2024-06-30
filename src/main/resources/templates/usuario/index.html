@@ -13,7 +13,6 @@
             <thead>
                 <th>Id</th>
                 <th>Nome</th>
-                <th>Tipo de Usuario</th>
                 <th>Endereço</th>
                 <th>Data Nascimento</th>
                 <th></th>
@@ -22,7 +21,6 @@
                 <tr th:each="umUsuario : ${listaUsuarios}">
                     <td th:text="${umUsuario.id}"></td>
                     <td th:text="${umUsuario.nome}"></td>
-                    <td th:text="${umUsuario.tpUsuario}"></td>
                     <td th:text="${umUsuario.endereco}"></td>
                     <td th:text="${umUsuario.dataNascimento}"></td>
                     <td><a th:href="@{'usuarios/alterar/' + ${umUsuario.id}}" class="btn btn-warning">Alterar</a>

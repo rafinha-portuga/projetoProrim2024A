@@ -23,26 +23,27 @@ public class Usuario {
     private String nome;
     @Column(length = 100, nullable = false)
     @NotBlank(message = "Campo não pode ser em branco")
-    private String tpUsuario;    
+    private String senhaUsu;    
     @Column(length = 1000)
     private String endereco;
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dataNascimento;
-
-    public String getTpUsuario() {
-        return tpUsuario;
-    }
-    public void setTpUsuario(String tpUsuario) {
-        this.tpUsuario = tpUsuario;
-    }
     
+    public String getSenhaUsu() {
+        return senhaUsu;
+    }
+    public void setSenhaUsu(String senhaUsu) {
+        this.senhaUsu = senhaUsu;
+    }
+
     public Date getDataNascimento() {
         return dataNascimento;
     }
     public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
+    
     public long getId() {
         return id;
     }
